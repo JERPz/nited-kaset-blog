@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NitedKaset Festival — Live Event Ticket Check-in System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div>
+                <h1>NitedKaset Festival</h1>
+                <p class="subtitle">Live Event Ticket Check-in System</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                I had the opportunity to support NitedKaset Festival at KMITL by developing and operating
+                a web-based system for ticket management and attendee check-in.
+            </p>
+            <!-- Instagram embed walk-through reel -->
+            <div class="instagram-embed">
+                <blockquote class="instagram-media"
+                    data-instgrm-permalink="https://www.instagram.com/reel/DQPbKbOkoUl/?utm_source=ig_embed&amp;utm_campaign=loading"
+                    data-instgrm-version="14"
+                    style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                    <div style="padding:16px;"> <a
+                            href="https://www.instagram.com/reel/DQPbKbOkoUl/?utm_source=ig_embed&amp;utm_campaign=loading"
+                            style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                            target="_blank"> ... (embed content) ... </a>
+                </blockquote>
+                <script async src="//www.instagram.com/embed.js"></script>
+            </div>
+
+            <p>
+                Unlike typical academic projects, this system was used during a real live event, where hundreds
+                of attendees needed to be processed quickly at the entrance. The goal was to build a lightweight
+                and reliable platform that could help event staff manage tickets efficiently while ensuring a
+                smooth entry experience for attendees.
+            </p>
+
+            <p>
+                This case study focuses not just on the technology, but on the operational lessons learned from
+                running a live system in unpredictable real-world conditions.
+            </p>
+        </section>
+
+        <section>
+            <h2>Event Setup & Data Foundation</h2>
+
+            <p>
+                Before the event, the organizers provided ticket purchase data exported from their ticketing platform.
+                This dataset formed the backbone of our verification system.
+            </p>
+
+            <h3>Ticket Data Structure</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>Attendee identification & verification</td>
+                    <td>user@example.com</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>Alternative verification method</td>
+                    <td>081-xxx-xxxx</td>
+                </tr>
+                <tr>
+                    <td>Ticket Zone</td>
+                    <td>Seating/access area assignment</td>
+                    <td>A, B, C</td>
+                </tr>
+                <tr>
+                    <td>Ticket Type</td>
+                    <td>Ticket category</td>
+                    <td>Stand, Sit</td>
+                </tr>
+            </table>
+
+            <div class="admin-panel">
+                <h3>Admin Interface</h3>
+                <p>
+                    The system includes a protected <code>/admin</code> path that requires staff authentication before
+                    access is granted. Once logged in an administrator can view imported ticket data, trigger CSV
+                    imports,
+                    and make manual edits directly within Firebase.
+                </p>
+                <img class="demo-img" src="asset/ui/admin.png" alt="Admin dashboard screenshot">
+            </div>
+
+            <h3>Progressive Web App (PWA) Decision</h3>
+            <p>
+                To simplify deployment and accessibility, the system was implemented as a <strong>Progressive Web
+                    App</strong>.
+                This allowed staff to access the platform directly from a browser on laptops or mobile devices without
+                installing any software.
+            </p>
+
+            <div class="feature-card">
+                <h4>✓ PWA Benefits</h4>
+                <p>
+                    No installation required • Works offline • Fast load times • Mobile & desktop compatible •
+                    Easy updates without app store delays
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>System Architecture</h2>
+
+            <p>
+                The system was designed as a three-tier architecture to keep it lightweight, scalable, and
+                responsive during peak check-in times.
+            </p>
+
+            <div class="diagram">
+                <div class="diagram-title">Data Flow Architecture</div>
+                <pre style="text-align: center; line-height: 1.8; color: #666;">Event Attendees / Staff
+            ↓
+    Web Application (PWA)
+    Vue.js + Tailwind CSS
+            ↓
+    Firebase Cloud Database
+    Real-time Ticket Verification
+            ↑
+    CSV Ticket Data Import</pre>
+            </div>
+
+            <p>
+                This lightweight architecture enabled instant access from any device with a web browser, which
+                was crucial for rapid deployment at the event entrance.
+            </p>
+        </section>
+
+        <section>
+            <h2>Core System Features</h2>
+
+            <p>
+                The application was designed with multiple interconnected features to support both attendees
+                and staff operations throughout the event.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🔐 Sign-in System</h4>
+                    <p>Secure authentication ensuring only authorized staff members could access operational tools
+                        like ticket verification and scanning.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🏠 Main Menu</h4>
+                    <p>Central navigation hub providing access to all event features, information, and tools for both
+                        attendees and staff.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎵 Line-up Information</h4>
+                    <p>Schedule display showing performance times and activities, allowing attendees to plan their
+                        event experience effectively.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📸 Photobooth Feature</h4>
+                    <p>Interactive section providing attendees with photobooth information and supporting one of the
+                        event's key interactive activities.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🎫 Ticket System</h4>
+                    <p>Comprehensive database interface allowing verification of ticket information including email,
+                        phone, zone, and ticket type.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>✅ Staff Scan Tool</h4>
+                    <p>Critical entrance feature enabling staff to search, scan, and verify tickets while checking in
+                        attendees efficiently.</p>
+                </div>
+            </div>
+
+            <h3>Feedback Collection</h3>
+            <p>
+                Rather than building a custom feedback system, the team chose to integrate <strong>Google Forms</strong>
+                for collecting event feedback. This strategic decision provided several operational advantages:
+            </p>
+            <ul>
+                <li>Instant response collection without server overhead</li>
+                <li>Automatic data aggregation in Google Sheets</li>
+                <li>Quick analysis and reporting after the event</li>
+                <li>Reduced development complexity during tight timelines</li>
+                <li>Familiar interface for survey respondents</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Data Management Workflow</h2>
+
+            <p>
+                Ticket data management followed a simple but effective import workflow that prepared the
+                database before the event began.
+            </p>
+
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="workflow-number">1</div>
+                    <div class="workflow-content">
+                        <h4>Ticket Sales Export</h4>
+                        <p>Event organizers exported ticket purchase data as CSV from their ticketing platform</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">2</div>
+                    <div class="workflow-content">
+                        <h4>Admin Import Tool</h4>
+                        <p>System administrators uploaded the CSV file through the application's import interface</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">3</div>
+                    <div class="workflow-content">
+                        <h4>Data Validation</h4>
+                        <p>System verified data integrity and format before processing</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">4</div>
+                    <div class="workflow-content">
+                        <h4>Firebase Storage</h4>
+                        <p>Validated ticket data stored in Firebase for real-time access during check-in</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Real-World Challenges</h2>
+
+            <p>
+                Operating a system in a real event environment revealed several unexpected challenges that
+                no amount of lab testing could have predicted. These lessons became as valuable as the system itself.
+            </p>
+
+            <h3>In-App Browser Compatibility Issues</h3>
+            <p>
+                <strong>The Problem:</strong> Some attendees opened their ticket links through social media apps
+                (Facebook, Instagram, WhatsApp) or messaging platforms. These links sometimes opened in in-app browsers,
+                which caused compatibility issues with certain browser features used by the PWA.
+            </p>
+            <p>
+                <strong>The Impact:</strong> Staff had to manually assist attendees and verify tickets using
+                alternative methods, creating bottlenecks at peak times.
+            </p>
+            <p>
+                <strong>The Lesson:</strong> Build systems that degrade gracefully. Always provide manual verification
+                workflows as fallback options.
+            </p>
+
+            <h3>Email Account Mismatch</h3>
+            <p>
+                <strong>The Problem:</strong> Attendees often attempted to access tickets using different email
+                accounts from their registration. For example, a user might purchase a ticket with a work email but
+                open it from a personal email account on their phone.
+            </p>
+            <p>
+                <strong>The Impact:</strong> The system couldn't find ticket records, requiring staff to manually
+                verify attendee information using phone numbers, ticket zones, or other identifying details.
+            </p>
+            <p>
+                <strong>The Lesson:</strong> Design verification systems with multiple lookup methods. Never rely
+                on a single identifier (email) for validation.
+            </p>
+
+            <h3>On-Site System Monitoring</h3>
+            <p>
+                <strong>The Solution:</strong> Because of these unexpected situations, the team needed to actively
+                monitor the system during the event. This included:
+            </p>
+            <ul>
+                <li>Assisting staff with real-time ticket verification</li>
+                <li>Resolving mismatched attendee information</li>
+                <li>Manually searching ticket records when automated lookup failed</li>
+                <li>Monitoring system performance and database response times</li>
+                <li>Providing immediate support to minimize entrance delays</li>
+            </ul>
+            <p>
+                Real-time monitoring and human intervention prevented minor technical issues from becoming
+                entrance bottlenecks.
+            </p>
+        </section>
+
+        <section>
+            <h2>Technology Stack</h2>
+
+            <p>
+                The system was built using modern web development technologies chosen for their balance of
+                simplicity, performance, and rapid development capability.
+            </p>
+            <div class="tech-stack">
+                <div class="tech-item">Vue.js 3</div>
+                <div class="tech-item">Tailwind CSS</div>
+                <div class="tech-item">Firebase (Realtime DB)</div>
+                <div class="tech-item">Progressive Web App</div>
+                <div class="tech-item">Google Forms</div>
+                <div class="tech-item">CSV Import</div>
+            </div>
+
+        </section>
+
+        <h3>Technology Rationale</h3>
+        <table>
+            <tr>
+                <th>Technology</th>
+                <th>Purpose</th>
+                <th>Why Chosen</th>
+            </tr>
+            <tr>
+                <td>Vue.js</td>
+                <td>Frontend framework</td>
+                <td>Fast development, reactive components, excellent mobile support</td>
+            </tr>
+            <tr>
+                <td>Tailwind CSS</td>
+                <td>Utility-based styling</td>
+                <td>Rapid UI development, consistent design, mobile-responsive by default</td>
+            </tr>
+            <tr>
+                <td>Firebase</td>
+                <td>Backend & database</td>
+                <td>Real-time sync, no server management, instant scalability, built-in security</td>
+            </tr>
+            <tr>
+                <td>PWA</td>
+                <td>App deployment</td>
+                <td>Works offline, no installation, instant deployment, works on any device</td>
+            </tr>
+        </table>
+        </section>
+
+        <section>
+            <h2>UI Preview & Assets</h2>
+            <p>
+                Below are animated snippets of the core user interfaces used by staff during the event.
+                Each GIF loops automatically to demonstrate interaction flows.
+            </p>
+            <div class="ui-gallery">
+                <img src="asset/ui/signin.gif" alt="Sign-in screen demo">
+                <img src="asset/ui/lineup.gif" alt="Line-up screen demo">
+                <img src="asset/ui/photobooth.gif" alt="Photobooth feature demo">
+                <img src="asset/ui/ticket.gif" alt="Ticket information demo">
+                <img src="asset/ui/scan.gif" alt="Scan tool demo">
+                <img src="asset/ui/feedback.gif" alt="Feedback form demo">
+            </div>
+        </section>
+
+        <section>
+            <h2>Behind the Scenes</h2>
+
+            <p>
+                During the NitedKaset Festival, the team worked directly at the event entrance to monitor
+                the system and assist with check-in operations. These operational moments captured the
+                real-world environment where the system was tested under live conditions.
+            </p>
+
+            <div class="photo-placeholder">
+                <p>📸 Event Photos & Check-in Operations</p>
+                <p style="font-size: 0.9rem; color: #999;">Images from NitedKaset Festival entrance operations</p>
+                <img class="demo-gif" src="asset/behind1.png" alt="Operation demo gif" />
+                <img class="demo-img" src="asset/behind2.png" alt="Behind the scenes photo" />
+            </div>
+
+            <p>
+                What made this experience valuable was seeing firsthand how real users interact with systems.
+                Attendees didn't use the platform exactly as we expected, and staff found creative workarounds
+                to operational challenges. These real-world interactions shaped our understanding far more than
+                any specification document could have.
+            </p>
+        </section>
+
+        <section>
+            <h2>Key Learnings</h2>
+
+            <ul>
+                <li><strong>Real systems must handle unexpected user behavior</strong> — No amount of testing
+                    can predict how real users will interact with your system</li>
+                <li><strong>Monitoring is essential during live deployments</strong> — Technical excellence
+                    alone isn't enough; human operational oversight is critical</li>
+                <li><strong>Simple solutions are often the most reliable</strong> — The PWA approach and
+                    Google Forms integration succeeded precisely because they were straightforward</li>
+                <li><strong>Operational decisions matter as much as technical implementation</strong> — The
+                    decision to have staff present and monitoring was as important as the code</li>
+                <li><strong>Build graceful degradation into your systems</strong> — Always provide fallback
+                    methods when primary features fail</li>
+                <li><strong>Design with multiple verification paths</strong> — Never assume users will
+                    interact with your system the way you designed it</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Conclusion</h2>
+
+            <p>
+                Supporting NitedKaset Festival with this check-in system was invaluable real-world experience
+                that transcended typical academic projects. Even though the platform itself was relatively
+                lightweight from a technical standpoint, deploying it in a live event environment revealed
+                many operational challenges that cannot be easily simulated during development.
+            </p>
+
+            <p>
+                The experience highlighted a fundamental lesson in software engineering:
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    <strong>Software does not end at deployment — real-world usage always introduces
+                        unexpected situations. Learning how to respond to those situations is an essential
+                        part of building reliable systems.</strong>
+                </p>
+            </div>
+
+            <p>
+                This project proved that the most important skill in software development isn't writing code—
+                it's understanding how systems behave when they encounter real users in real conditions.
+                That understanding can only come from hands-on experience and a willingness to adapt.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>NitedKaset Festival — Live Event System Case Study | KMITL</p>
+    </footer>
+
+</body>
+
+</html>
